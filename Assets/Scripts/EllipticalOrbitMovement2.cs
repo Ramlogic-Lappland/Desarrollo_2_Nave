@@ -3,14 +3,13 @@ using UnityEngine;
 public class EllipticalOrbitMovement2 : MonoBehaviour
 {
     [SerializeField] private Transform center;
-    [SerializeField] private float semiMajorAxis = 10f; // Renamed for clarity
+    [SerializeField] private float semiMajorAxis = 10f; // Distance from target
     [SerializeField] private float eccentricity = 0.5f; // Replaces semiMinor (0 = circle, <1 = ellipse)
-    [SerializeField] private float orbitalPeriod = 10f; // Seconds to complete one orbit
+    [SerializeField] private float orbitalPeriod = 10f; // Seconds to complete one orbit (rotation speed around target)
     [SerializeField] private float angleOffset = 0f; // Starting position
 
-    [Header("Orbit Orientation")] [SerializeField]
-    private Vector3 orbitNormal = Vector3.up; // Axis of rotation
-
+    [Header("Orbit Orientation")]
+    [SerializeField] private Vector3 orbitNormal = Vector3.up; // Axis of rotation
     [SerializeField] private float inclination = 0f; // Tilt relative to reference plane
 
     private float _currentAngle = 0f;
@@ -18,6 +17,9 @@ public class EllipticalOrbitMovement2 : MonoBehaviour
 
     private void Start()
     {
+        eccentricity = Mathf.Clamp(eccentricity, 0f, 0.999f);
+        if (orbitalPeriod <= 0f) orbitalPeriod = 1f;
+        
         _semiMinorAxis = semiMajorAxis * Mathf.Sqrt(1 - Mathf.Pow(eccentricity, 2));
         _currentAngle = angleOffset;
     }
