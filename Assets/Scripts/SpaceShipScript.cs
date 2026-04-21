@@ -7,7 +7,7 @@ public class SpaceShipScript : MonoBehaviour
     [SerializeField] private float acceleration = 10f;     
     [SerializeField] private float maxSpeed = 100f;         
     [SerializeField] private float boostMultiplier = 2.5f; 
-    [SerializeField] private float dragCoefficient = 0.5f; // feels better with drag over time so the player just doesn't continue to the infinite
+    [SerializeField] private float dragCoefficient = 0.2f; // feels better with drag over time so the player just doesn't continue to the infinite
     [Header("Boost Settings")]
     [SerializeField] private Rigidbody rb;
     private bool isThrusting = false;
@@ -34,6 +34,14 @@ public class SpaceShipScript : MonoBehaviour
     private Vector2 mouseDelta;  
     
     private Vector3 targetRotation;
+    
+    [Header("Shooting Settings")]
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform leftGunSpawn;
+    [SerializeField] private Transform rightGunSpawn;
+    [SerializeField] private float fireRate = 0.2f;
+    [SerializeField] private float bulletSpeed = 50f;
+    private float nextFireTime = 0f;
 
     private void Start()
     {
@@ -56,6 +64,15 @@ public class SpaceShipScript : MonoBehaviour
 
     private void Update()
     {
+        if (Cursor.lockState == CursorLockMode.Locked && Input.GetMouseButton(0))
+        {
+            if (Time.time >= nextFireTime)
+            {
+                Shoot();
+                nextFireTime = Time.time + fireRate;
+            }
+        }
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Cursor.lockState == CursorLockMode.Confined)
@@ -159,6 +176,30 @@ public class SpaceShipScript : MonoBehaviour
         targetRotation.z = Mathf.Repeat(targetRotation.z, 360f);
     }
 
+    private void Shoot()
+    {
+        
+        if (bulletPrefab == null || leftGunSpawn == null || rightGunSpawn == null)
+        {
+            Debug.LogWarning("Bullet prefab or spawn points not assigned!");
+            return;
+        }
+        
+        var leftBullet = Instantiate(bulletPrefab, leftGunSpawn.position, leftGunSpawn.rotation);
+        var leftBulletScript = leftBullet.GetComponent<BulletBehaviour>();
+        if (leftBulletScript != null)
+        {
+            // Optionally set bullet speed if needed
+            leftBulletScript.SetSpeed(bulletSpeed);
+        }
+        
+        var rightBullet = Instantiate(bulletPrefab, rightGunSpawn.position, rightGunSpawn.rotation);
+        var rightBulletScript = rightBullet.GetComponent<BulletBehaviour>();
+        if (rightBulletScript != null)
+        {
+            rightBulletScript.SetSpeed(bulletSpeed);
+        }
+    }
 }
 
 
