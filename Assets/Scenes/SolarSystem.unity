@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &71775530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 702963243432393170, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+  m_PrefabInstance: {fileID: 2303187491859424748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &326080047 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
@@ -148,6 +153,11 @@ MonoBehaviour:
   rollSpeed: 35
   invertY: 0
   invertX: 0
+  bulletPrefab: {fileID: 1889442406297546185, guid: 7801e6b7c2e876d4786ade6cd08b1288, type: 3}
+  leftGunSpawn: {fileID: 1169027904}
+  rightGunSpawn: {fileID: 71775530}
+  fireRate: 0.2
+  bulletSpeed: 150
 --- !u!54 &326080050
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,6 +185,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &326080051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326080047}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 4.100769, y: 1.572816, z: 5.128937}
+  m_Center: {x: -0.3608551, y: 2.1513, z: -0.86061096}
 --- !u!4 &734447132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6687753249520854274, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
@@ -307,6 +338,37 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!4 &1169027904 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4878268213072368288, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+  m_PrefabInstance: {fileID: 2303187491859424748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1418652836 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 471844829004700337, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+  m_PrefabInstance: {fileID: 2303187491859424748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1418652840
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418652836}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.912647, y: 4.238168, z: 11.334681}
+  m_Center: {x: 0, y: -0.000000834465, z: 0.00000071525574}
 --- !u!1001 &746283940968566488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,6 +417,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3704451534118332431, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      propertyPath: m_TagString
+      value: Planet
+      objectReference: {fileID: 0}
     - target: {fileID: 3863636887528061175, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
       propertyPath: center
       value: 
@@ -362,6 +428,14 @@ PrefabInstance:
     - target: {fileID: 5738328368325849731, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
       propertyPath: m_Name
       value: Korriban
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738328368325849731, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171141570533152399, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -416,6 +490,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1374498882818221442, guid: f4a86e974485c2448926acd462d9bff9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1563324998830692248, guid: f4a86e974485c2448926acd462d9bff9, type: 3}
       propertyPath: center
       value: 
@@ -423,6 +501,10 @@ PrefabInstance:
     - target: {fileID: 7627058181013766988, guid: f4a86e974485c2448926acd462d9bff9, type: 3}
       propertyPath: m_Name
       value: Planet_Mars
+      objectReference: {fileID: 0}
+    - target: {fileID: 7627058181013766988, guid: f4a86e974485c2448926acd462d9bff9, type: 3}
+      propertyPath: m_TagString
+      value: Planet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -481,9 +563,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5814682806568407699, guid: 7b5f9d3fc2a426c4eb32a19fec29807b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8359874304591583268, guid: 7b5f9d3fc2a426c4eb32a19fec29807b, type: 3}
       propertyPath: m_Name
       value: Planet_Csilla
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359874304591583268, guid: 7b5f9d3fc2a426c4eb32a19fec29807b, type: 3}
+      propertyPath: m_TagString
+      value: Planet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -542,10 +632,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet_Terran
       objectReference: {fileID: 0}
+    - target: {fileID: 4284395716354029747, guid: a9052efb10c8007459b51bfd9c8185a6, type: 3}
+      propertyPath: m_TagString
+      value: Planet
+      objectReference: {fileID: 0}
     - target: {fileID: 6944610962358173477, guid: a9052efb10c8007459b51bfd9c8185a6, type: 3}
       propertyPath: center
       value: 
       objectReference: {fileID: 734447132}
+    - target: {fileID: 9213698555446010620, guid: a9052efb10c8007459b51bfd9c8185a6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -559,9 +657,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 471844829004700337, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+      propertyPath: m_TagString
+      value: Ship
+      objectReference: {fileID: 0}
     - target: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
       propertyPath: m_Name
       value: SpaceShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+      propertyPath: m_TagString
+      value: Ship
       objectReference: {fileID: 0}
     - target: {fileID: 6747087671262068256, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -613,6 +719,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 326080050}
+    - targetCorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 326080051}
+    - targetCorrespondingSourceObject: {fileID: 471844829004700337, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1418652840}
   m_SourcePrefab: {fileID: 100100000, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
 --- !u!1001 &4415958351198167463
 PrefabInstance:
@@ -679,9 +791,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 202348392973510477, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
+      propertyPath: m_TagString
+      value: Planet
+      objectReference: {fileID: 0}
     - target: {fileID: 4376485263464496077, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
       propertyPath: m_Name
       value: Nar
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250256904622367016, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6124143716595417703, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
       propertyPath: m_LocalPosition.x
