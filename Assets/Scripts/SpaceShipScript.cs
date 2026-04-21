@@ -3,40 +3,49 @@ using UnityEngine;
 
 public class SpaceShipScript : MonoBehaviour
 {
-    [Header("SpaceShip Acceleration")]
-    [SerializeField] private float acceleration = 10f;     
-    [SerializeField] private float maxSpeed = 100f;         
-    [SerializeField] private float boostMultiplier = 2.5f; 
-    [SerializeField] private float dragCoefficient = 0.2f; // feels better with drag over time so the player just doesn't continue to the infinite
-    [Header("Boost Settings")]
-    [SerializeField] private Rigidbody rb;
+    [Header("SpaceShip Acceleration")] [SerializeField]
+    private float acceleration = 10f;
+
+    [SerializeField] private float maxSpeed = 100f;
+    [SerializeField] private float boostMultiplier = 2.5f;
+
+    [SerializeField]
+    private float
+        dragCoefficient = 0.2f; // feels better with drag over time so the player just doesn't continue to the infinite
+
+    [Header("Boost Settings")] [SerializeField]
+    private Rigidbody rb;
+
     private bool isThrusting = false;
     private bool isBoosting = false;
-    
-    [Header("SpaceShip Rotation Settings")]
-    [SerializeField] private float baseRotation = 0.1f;
+
+    [Header("SpaceShip Rotation Settings")] [SerializeField]
+    private float baseRotation = 0.1f;
+
     [SerializeField] private float maxRotation = 5;
     [SerializeField] private float smooth = 10f;
     [SerializeField] private float velocityThreshold = 5f;
-    
-    [Header("SpaceShip Roll Settings")]
-    [SerializeField] private float rollSpeed = 100f;
-    
-    [Header("SpaceShip Axis Settings")]
-    [SerializeField] private bool invertY = false;
+
+    [Header("SpaceShip Roll Settings")] [SerializeField]
+    private float rollSpeed = 100f;
+
+    [Header("SpaceShip Axis Settings")] [SerializeField]
+    private bool invertY = false;
+
     [SerializeField] private bool invertX = false;
-    
+
     // Mouse Tracking
     private Vector2 previousMousePosition;
     private Vector2 currentMousePosition;
     private Vector2 mouseSpeed;
     private float previousTime;
-    private Vector2 mouseDelta;  
-    
+    private Vector2 mouseDelta;
+
     private Vector3 targetRotation;
-    
-    [Header("Shooting Settings")]
-    [SerializeField] private GameObject bulletPrefab;
+
+    [Header("Shooting Settings")] [SerializeField]
+    private GameObject bulletPrefab;
+
     [SerializeField] private Transform leftGunSpawn;
     [SerializeField] private Transform rightGunSpawn;
     [SerializeField] private float fireRate = 0.2f;
@@ -47,18 +56,19 @@ public class SpaceShipScript : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
         if (rb == null)
         {
             Debug.LogError("Spaceship requires a Rigidbody component!");
             return;
         }
-        
-        rb.useGravity = false;   // Disable default gravity if forgotten & add drag
+
+        rb.useGravity = false; // Disable default gravity if forgotten & add drag
         rb.linearDamping = dragCoefficient;
-        
+
         previousMousePosition = Input.mousePosition;
-        currentMousePosition = previousMousePosition; // is done this way on start cuz previous must logically be loaded before current.
+        currentMousePosition =
+            previousMousePosition; // is done this way on start cuz previous must logically be loaded before current.
         previousTime = Time.time;
     }
 
@@ -72,7 +82,7 @@ public class SpaceShipScript : MonoBehaviour
                 nextFireTime = Time.time + fireRate;
             }
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Cursor.lockState == CursorLockMode.Confined)
@@ -84,10 +94,11 @@ public class SpaceShipScript : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Confined;
             }
         }
+
         MovementInputHandler();
         ThrustInputHandler();
         MouseInputHandler();
-        RotationHandler(); 
+        RotationHandler();
         RollHandler();
         SmoothRotation();
     }
@@ -101,7 +112,7 @@ public class SpaceShipScript : MonoBehaviour
     private void ThrustInputHandler()
     {
         if (!isThrusting) return;
-        
+
         var currentMaxSpeed = isBoosting ? maxSpeed * boostMultiplier : maxSpeed;
 
         if (rb.linearVelocity.magnitude < currentMaxSpeed)
@@ -109,7 +120,7 @@ public class SpaceShipScript : MonoBehaviour
             var thrustForce = transform.forward * acceleration * rb.mass;
             rb.AddForce(thrustForce, ForceMode.Force);
         }
-        
+
         if (rb.linearVelocity.magnitude > currentMaxSpeed)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
@@ -133,7 +144,7 @@ public class SpaceShipScript : MonoBehaviour
         if (invertX) horizontalInput = -horizontalInput;
         if (invertY) verticalInput = -verticalInput;
 
-        
+
         var speedMultiplier = Mathf.Clamp01(mouseSpeed.magnitude / maxRotation);
         var currentRotationSpeed = baseRotation * (1 + speedMultiplier * 9); // 1x to 10x scaling
 
@@ -150,7 +161,7 @@ public class SpaceShipScript : MonoBehaviour
         var targetQuaternion = Quaternion.Euler(targetRotation);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, smooth * Time.deltaTime);
     }
-    
+
     private void ResetRotation()
     {
         targetRotation = Vector3.zero;
@@ -164,27 +175,29 @@ public class SpaceShipScript : MonoBehaviour
         {
             rollInput -= 1f; // Left roll
         }
+
         if (Input.GetKey(KeyCode.D))
         {
             rollInput += 1f; // Right roll
         }
+
         if (rollInput == 0f) return;
 
         var roll = rollInput * rollSpeed * Time.deltaTime;
-        targetRotation += new Vector3(0, 0, -roll); 
+        targetRotation += new Vector3(0, 0, -roll);
 
         targetRotation.z = Mathf.Repeat(targetRotation.z, 360f);
     }
 
     private void Shoot()
     {
-        
+
         if (bulletPrefab == null || leftGunSpawn == null || rightGunSpawn == null)
         {
             Debug.LogWarning("Bullet prefab or spawn points not assigned!");
             return;
         }
-        
+
         var leftBullet = Instantiate(bulletPrefab, leftGunSpawn.position, leftGunSpawn.rotation);
         var leftBulletScript = leftBullet.GetComponent<BulletBehaviour>();
         if (leftBulletScript != null)
@@ -192,12 +205,30 @@ public class SpaceShipScript : MonoBehaviour
             // Optionally set bullet speed if needed
             leftBulletScript.SetSpeed(bulletSpeed);
         }
-        
+
         var rightBullet = Instantiate(bulletPrefab, rightGunSpawn.position, rightGunSpawn.rotation);
         var rightBulletScript = rightBullet.GetComponent<BulletBehaviour>();
         if (rightBulletScript != null)
         {
             rightBulletScript.SetSpeed(bulletSpeed);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Planet"))
+        {
+            var planet = other.GetComponent<PlanetBehaviour>();
+            if (planet != null)
+            {
+                planet.DestroyPlanet();
+            }
+            else
+            {
+                Destroy(other.gameObject);
+            }
+
+            //Destroy(gameObject);
         }
     }
 }
@@ -210,9 +241,9 @@ public class SpaceShipScript : MonoBehaviour
 
 
 /* Deprecated Code due to issues with locking the screen
- 
+
 private void Update()
-{  
+{
         var delta = (Vector2)Input.mousePosition - previousMousePosition;
         if (delta.magnitude > 0)
         {
@@ -220,10 +251,10 @@ private void Update()
         }
         previousMousePosition = Input.mousePosition;
   }
-  
+
   ----------------------------------------------------------------------------------
-  
-  
+
+
  private void MouseInputHandler()
  {
 currentMousePosition = Input.mousePosition;

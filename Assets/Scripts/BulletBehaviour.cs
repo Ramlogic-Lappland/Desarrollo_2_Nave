@@ -20,13 +20,17 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.CompareTag("Planet"))
         {
-            if (impactEffect != null)
+            var planet = other.GetComponent<PlanetBehaviour>();
+            if (planet != null)
             {
-                Instantiate(impactEffect, transform.position, Quaternion.identity);
+                planet.DestroyPlanet();
             }
-            
-            Destroy(other.gameObject);  // Destroy the planet
-            Destroy(gameObject);// Destroy the bullet
+            else
+            {
+                Destroy(other.gameObject);
+            }
+
+            Destroy(gameObject);
         }
     }
     
