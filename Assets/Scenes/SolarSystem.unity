@@ -119,6 +119,62 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &326080047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+  m_PrefabInstance: {fileID: 2303187491859424748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &326080048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326080047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f5ff2dc56c7b064a818fe724b18dc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpaceShipScript
+  acceleration: 10
+  maxSpeed: 50
+  boostMultiplier: 2.5
+  dragCoefficient: 0.5
+  rb: {fileID: 326080050}
+  baseRotation: 0.05
+  maxRotation: 2.5
+  smooth: 10
+  velocityThreshold: 2.5
+  rollSpeed: 35
+  invertY: 0
+  invertX: 0
+--- !u!54 &326080050
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326080047}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &734447132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6687753249520854274, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
@@ -550,7 +606,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 326080048}
+    - targetCorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 326080050}
   m_SourcePrefab: {fileID: 100100000, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
 --- !u!1001 &4415958351198167463
 PrefabInstance:
