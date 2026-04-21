@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1904
     height: 973
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 209
+  controlID: 48
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 210
+  controlID: 49
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 211
+  controlID: 50
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 279
+  controlID: 112
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -1270,11 +1270,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.2013291, y: 0.03084304, z: -0.006341321, w: 0.979041}
     speed: 2
-    m_Value: {x: 0.20132446, y: 0.03084233, z: -0.006341175, w: 0.97901845}
+    m_Value: {x: -0.2013291, y: -0.030843042, z: 0.006341321, w: -0.97904104}
   m_Size:
-    m_Target: 3.1285632
+    m_Target: 3.73087
     speed: 2
-    m_Value: 3.1285632
+    m_Value: 3.5702105
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1353,11 +1353,8 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1454
-      - m_Data: -1450
-      - m_Data: -1302
       - m_Data: -1300
-      - m_Data: 45594
+      - m_Data: 45606
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1590,7 +1587,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Art/SpaceShip
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1600,22 +1597,22 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 57
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Art/SpaceShip
   m_LastFoldersGridSize: 57
   m_LastProjectPath: E:\Programming\Desarrollo_2_Nave
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 87}
+    scrollPos: {x: 0, y: 7}
     m_SelectedIDs:
-    - m_Data: 46324
+    - m_Data: 46362
     m_LastClickedID:
-      m_Data: 46324
+      m_Data: 46362
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46138
-    - m_Data: 46318
+    - m_Data: 45968
+    - m_Data: 46330
     - m_Data: 1000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1649,7 +1646,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 46138
+    - m_Data: 45968
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
