@@ -17,9 +17,16 @@ public class SoundLibrary : MonoBehaviour
         {
             if (soundEffect.groupID == name)
             {
+                if (soundEffect.clips == null || soundEffect.clips.Length == 0)
+                {
+                    Debug.LogWarning($"SoundLibrary: Group '{name}' exists, but the clips array is empty!");
+                    return null;
+                }
                 return soundEffect.clips[Random.Range(0, soundEffect.clips.Length)];
             }
         }
+    
+        Debug.LogWarning($"SoundLibrary: No group found with the name '{name}'");
         return null;
     }
 
