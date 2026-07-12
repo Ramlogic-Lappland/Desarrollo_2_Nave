@@ -141,23 +141,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f5ff2dc56c7b064a818fe724b18dc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpaceShipScript
-  acceleration: 10
-  maxSpeed: 50
-  boostMultiplier: 2.5
+  forwardThrust: 50
+  reverseThrust: 35
+  lateralThrust: 20
+  maxSpeed: 120
+  boostMultiplier: 3
   dragCoefficient: 0.5
-  rb: {fileID: 326080050}
-  baseRotation: 0.05
-  maxRotation: 2.5
-  smooth: 10
-  velocityThreshold: 2.5
-  rollSpeed: 35
-  invertY: 0
+  pitchTorque: 1
+  yawTorque: 1
+  rollTorque: 1
+  angularDrag: 0.5
+  boostKey: 304
+  invertY: 1
   invertX: 0
+  mouseSensitivity: 5
   bulletPrefab: {fileID: 1889442406297546185, guid: 7801e6b7c2e876d4786ade6cd08b1288, type: 3}
   leftGunSpawn: {fileID: 1169027904}
   rightGunSpawn: {fileID: 71775530}
   fireRate: 0.2
-  bulletSpeed: 150
+  bulletSpeed: 180
 --- !u!54 &326080050
 Rigidbody:
   m_ObjectHideFlags: 0
