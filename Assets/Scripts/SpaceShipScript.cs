@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class SpaceShipScript : MonoBehaviour
@@ -18,6 +19,7 @@ public class SpaceShipScript : MonoBehaviour
 
     private bool isThrusting = false;
     private bool isBoosting = false;
+    private bool _alive = true;
 
     [Header("SpaceShip Rotation Settings")] [SerializeField]
     private float baseRotation = 0.1f;
@@ -56,6 +58,11 @@ public class SpaceShipScript : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (_alive == false)
+        {
+            _alive = true;
+        }
 
         if (rb == null)
         {
@@ -227,85 +234,13 @@ public class SpaceShipScript : MonoBehaviour
             {
                 Destroy(other.gameObject);
             }
-
-            //Destroy(gameObject);
+            Death();
         }
     }
-}
 
-
-
-
-
-
-
-
-/* Deprecated Code due to issues with locking the screen
-
-private void Update()
-{
-        var delta = (Vector2)Input.mousePosition - previousMousePosition;
-        if (delta.magnitude > 0)
-        {
-            transform.Rotate(-delta.y * 0.1f, delta.x * 0.1f, 0);
-        }
-        previousMousePosition = Input.mousePosition;
-  }
-
-  ----------------------------------------------------------------------------------
-
-
- private void MouseInputHandler()
- {
-currentMousePosition = Input.mousePosition;
-var currentTime = Time.time;
-var deltaTime = currentTime - previousTime;
-
-if (deltaTime > 0.0001f)
-{
-    Vector2 deltaPosition = currentMousePosition - previousMousePosition;
-    mouseSpeed = deltaPosition / deltaTime;
-
-    mouseSpeed = Vector2.ClampMagnitude(mouseSpeed, 5000f);
-
-    if (mouseSpeed.magnitude < velocityThreshold)
+    private void Death()
     {
-        mouseSpeed = Vector2.zero;
+        _alive = false;
+        Destroy(gameObject);
     }
 }
-else
-{
-    mouseSpeed = Vector2.zero;
-}
-
-previousMousePosition = currentMousePosition;
-previousTime = currentTime;
-}
-
------------------------------------------------------------------------
-
-
-private void RotationHandler()
-{
-if (mouseSpeed == Vector2.zero) return;
-
-var horizontalInput = mouseSpeed.x;
-var verticalInput = mouseSpeed.y;
-
-if (invertX) horizontalInput = -horizontalInput;
-if (invertY) verticalInput = -verticalInput;
-
-var velocityMagnitude = mouseSpeed.magnitude;
-var speedMultiplier = Mathf.Clamp01(velocityMagnitude / maxRotation);
-var currentRotationSpeed = baseRotation * speedMultiplier;
-
-var pitch = verticalInput * currentRotationSpeed * Time.deltaTime;
-var yaw = horizontalInput * currentRotationSpeed * Time.deltaTime;
-
-targetRotation += new Vector3(-pitch, yaw, 0);
-targetRotation.x = Mathf.Clamp(targetRotation.x, -80f, 80f);
-
-
-targetRotation.y = Mathf.Repeat(targetRotation.y, 360f);
-}
-*/
