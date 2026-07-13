@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 5374008111548569770}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -702314077207193255, guid: d2268f69edbe9e14aba1e5429d22c20c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -138,7 +138,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2754941541775355350}
+  - component: {fileID: 947853301690341563}
   - component: {fileID: 7399307814845413299}
+  - component: {fileID: 5510834849554306726}
   - component: {fileID: 7297395586499911164}
   m_Layer: 0
   m_Name: AudioManager
@@ -164,6 +166,23 @@ Transform:
   - {fileID: 9105428155565523047}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &947853301690341563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231509868745499556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b5c0c6791577ea41af1ce5f682a7a04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicLibrary
+  tracks:
+  - trackName: menusong
+    clip: {fileID: 8300000, guid: 9948e6f3d50fc7b4ba19dbe8e4257b39, type: 3}
+  - trackName: gamesong
+    clip: {fileID: 8300000, guid: aa425a90786ac354cac15f39894196e8, type: 3}
 --- !u!114 &7399307814845413299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,10 +196,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundLibrary
   soundEffects:
-  - groupID: Button
+  - groupID: click
     clips:
     - {fileID: 8300000, guid: 5ddbaea1303061a41b9d17be19fe7822, type: 3}
+  - groupID: hover
+    clips:
     - {fileID: 8300000, guid: f3eacc384874cc34cb272321ea5102ba, type: 3}
+--- !u!114 &5510834849554306726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231509868745499556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab0884b0b997374dac28eaf876e2c39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  musicLibrary: {fileID: 947853301690341563}
+  musicSource: {fileID: 6688226417160730501}
 --- !u!114 &7297395586499911164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +271,7 @@ AudioSource:
   m_GameObject: {fileID: 8942833779292454831}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6979733069878053991, guid: d2268f69edbe9e14aba1e5429d22c20c, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

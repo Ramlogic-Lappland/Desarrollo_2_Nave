@@ -35,6 +35,8 @@ public class SpaceShipScript : MonoBehaviour
 
     private Rigidbody rb;
     private bool isBoosting;
+    
+    public GameOverMenu gameOverMenu;
 
     void Start()
     {
@@ -201,8 +203,9 @@ public class SpaceShipScript : MonoBehaviour
         }
     }
 
-    private static void Death()
+    private void Death()
     {
-        // TODO: implement respawn / game over
+        Time.timeScale = 0f;
+        gameOverMenu.EnableGameOverScreen();
     }
 }
