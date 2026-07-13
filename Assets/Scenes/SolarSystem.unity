@@ -124,6 +124,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 702963243432393170, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
   m_PrefabInstance: {fileID: 2303187491859424748}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &112798056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5188048139565305723, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
+  m_PrefabInstance: {fileID: 4415958351198167463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &185360078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 202348392973510477, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
+  m_PrefabInstance: {fileID: 6375744666033884239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &185360084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185360078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!1 &196635275
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +250,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &302073862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5254761325899150723, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+  m_PrefabInstance: {fileID: 746283940968566488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &302073868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302073862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!1 &326080047 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4774193529771066992, guid: d792a020b0d20274d97e89001c424fc8, type: 3}
@@ -312,6 +355,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.100769, y: 1.572816, z: 5.128937}
   m_Center: {x: -0.3608551, y: 2.1513, z: -0.86061096}
+--- !u!1 &381583578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3704451534118332431, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+  m_PrefabInstance: {fileID: 746283940968566488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &381583584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381583578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!1 &472222611
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,11 +553,44 @@ MonoBehaviour:
             m_StringArgument: click
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &589308878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1561801265179959042, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+  m_PrefabInstance: {fileID: 746283940968566488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &589308884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589308878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!4 &734447132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6687753249520854274, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
   m_PrefabInstance: {fileID: 4415958351198167463}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &734447136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112798056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48cb6e60276c7114884bd665d200800b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SunBehaviour
+  destructionEffect: {fileID: 0}
+  spaceShip: {fileID: 326080048}
 --- !u!1 &750267243
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +770,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750267243}
   m_CullTransparentMesh: 1
+--- !u!1 &931355959 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5738328368325849731, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+  m_PrefabInstance: {fileID: 746283940968566488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &931355961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931355959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!1001 &948171358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1038,6 +1152,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 9.912647, y: 4.238168, z: 11.334681}
   m_Center: {x: 0, y: -0.000000834465, z: 0.00000071525574}
+--- !u!1 &1543825863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3365650722074027052, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+  m_PrefabInstance: {fileID: 746283940968566488}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1543825869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543825863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!1 &1673191042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,6 +1308,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673191042}
   m_CullTransparentMesh: 1
+--- !u!1 &1838090523 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4284395716354029747, guid: a9052efb10c8007459b51bfd9c8185a6, type: 3}
+  m_PrefabInstance: {fileID: 1498873381640215632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1838090529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838090523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
 --- !u!1 &1932148889
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1705,22 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5738328368325849731, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 931355961}
+    - targetCorrespondingSourceObject: {fileID: 3704451534118332431, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 381583584}
+    - targetCorrespondingSourceObject: {fileID: 1561801265179959042, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 589308884}
+    - targetCorrespondingSourceObject: {fileID: 3365650722074027052, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1543825869}
+    - targetCorrespondingSourceObject: {fileID: 5254761325899150723, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 302073868}
   m_SourcePrefab: {fileID: 100100000, guid: 3a4e600c28e35dd43803ef3a2c24ba9b, type: 3}
 --- !u!1001 &868910867757531186
 PrefabInstance:
@@ -1563,6 +1730,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1624882728774004109, guid: f4a86e974485c2448926acd462d9bff9, type: 3}
+      propertyPath: destructionEffect
+      value: 
+      objectReference: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
     - target: {fileID: 255493342151711236, guid: f4a86e974485c2448926acd462d9bff9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1760,7 +1931,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4284395716354029747, guid: a9052efb10c8007459b51bfd9c8185a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1838090529}
   m_SourcePrefab: {fileID: 100100000, guid: a9052efb10c8007459b51bfd9c8185a6, type: 3}
 --- !u!1001 &2303187491859424748
 PrefabInstance:
@@ -1847,8 +2021,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5149875445333553211, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5188048139565305723, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
       propertyPath: m_Name
+      value: Sun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5188048139565305723, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
+      propertyPath: m_TagString
       value: Sun
       objectReference: {fileID: 0}
     - target: {fileID: 6687753249520854274, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
@@ -1894,7 +2076,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5188048139565305723, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 734447136}
   m_SourcePrefab: {fileID: 100100000, guid: f4f88182b554b284894ebc94b29bfb90, type: 3}
 --- !u!1001 &6375744666033884239
 PrefabInstance:
@@ -1963,7 +2148,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 202348392973510477, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 185360084}
   m_SourcePrefab: {fileID: 100100000, guid: 16b6a136e1dd8f8469d90d3675c36db7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

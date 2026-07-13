@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6009753380710472226}
   - component: {fileID: 5814682806568407699}
   - component: {fileID: 2008882084823466120}
+  - component: {fileID: 7147687172659336255}
   m_Layer: 0
   m_Name: Planet_Csilla
   m_TagString: Untagged
@@ -132,3 +133,17 @@ MonoBehaviour:
   angleOffset: 10
   orbitNormal: {x: 0, y: 0, z: 1}
   inclination: 0
+--- !u!114 &7147687172659336255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359874304591583268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f59d1d5317c127745a4d3d43ed2f0f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetBehaviour
+  destructionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 3}
+  destroyMoonsOnDeath: 1
