@@ -31,6 +31,10 @@ public class SpaceShipScript : MonoBehaviour
     [SerializeField] private Transform rightGunSpawn;
     [SerializeField] private float fireRate = 0.2f;
     [SerializeField] private float bulletSpeed = 180f;
+    
+    [Header("Reference")]
+    [SerializeField] private GameObject destructionEffect;
+    
     private float nextFireTime;
 
     private Rigidbody rb;
@@ -210,6 +214,7 @@ public class SpaceShipScript : MonoBehaviour
 
     public void Death()
     {
+        Instantiate(destructionEffect, transform.position, Quaternion.identity);
         Time.timeScale = 0f;
         gameOverMenu.EnableGameOverScreen();
     }

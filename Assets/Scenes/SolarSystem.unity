@@ -306,6 +306,7 @@ MonoBehaviour:
   rightGunSpawn: {fileID: 71775530}
   fireRate: 0.2
   bulletSpeed: 180
+  destructionEffect: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
   gameOverMenu: {fileID: 1972303646}
 --- !u!54 &326080050
 Rigidbody:
