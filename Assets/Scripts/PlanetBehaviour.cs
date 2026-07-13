@@ -29,7 +29,6 @@ public class PlanetBehaviour : MonoBehaviour
         if (other.CompareTag("Ship"))
         {
             DestroyPlanet();
-            // DestroyShip();
         }
     }
 

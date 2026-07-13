@@ -194,16 +194,21 @@ public class SpaceShipScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Planet"))
+        if (other.CompareTag("Planet") || other.CompareTag("Sun"))
         {
             PlanetBehaviour planet = other.GetComponent<PlanetBehaviour>();
             if (planet != null) planet.DestroyPlanet();
             else Destroy(other.gameObject);
             Death();
+            SunBehaviour sun = other.GetComponent<SunBehaviour>();
+            if (sun != null)
+            {
+                Death();
+            }
         }
     }
 
-    private void Death()
+    public void Death()
     {
         Time.timeScale = 0f;
         gameOverMenu.EnableGameOverScreen();
