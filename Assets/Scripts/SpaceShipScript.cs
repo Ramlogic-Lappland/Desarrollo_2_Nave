@@ -1,223 +1,194 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 
 public class SpaceShipScript : MonoBehaviour
 {
-    [Header("SpaceShip Acceleration")] [SerializeField]
-    private float acceleration = 10f;
-
+    [Header("Thrust & Speed")]
+    [SerializeField] private float forwardThrust = 50f;
+    [SerializeField] private float reverseThrust = 30f;
+    [SerializeField] private float lateralThrust = 40f;
     [SerializeField] private float maxSpeed = 100f;
     [SerializeField] private float boostMultiplier = 2.5f;
+    [SerializeField] private float dragCoefficient = 0.2f;
 
-    [SerializeField]
-    private float
-        dragCoefficient = 0.2f; // feels better with drag over time so the player just doesn't continue to the infinite
+    [Header("Rotation (Torque)")] // how fast rotation slows
+    [SerializeField] private float pitchTorque = 5f;
+    [SerializeField] private float yawTorque = 5f;
+    [SerializeField] private float rollTorque = 8f;
+    [SerializeField] private float angularDrag = 0.5f;  
+    [SerializeField] private float maxSpinningVelocity = 20f;
 
-    [Header("Boost Settings")] [SerializeField]
-    private Rigidbody rb;
+    [Header("Boost")]
+    [SerializeField] private KeyCode boostKey = KeyCode.LeftShift;
 
-    private bool isThrusting = false;
-    private bool isBoosting = false;
-    private bool _alive = true;
-
-    [Header("SpaceShip Rotation Settings")] [SerializeField]
-    private float baseRotation = 0.1f;
-
-    [SerializeField] private float maxRotation = 5;
-    [SerializeField] private float smooth = 10f;
-    [SerializeField] private float velocityThreshold = 5f;
-
-    [Header("SpaceShip Roll Settings")] [SerializeField]
-    private float rollSpeed = 100f;
-
-    [Header("SpaceShip Axis Settings")] [SerializeField]
-    private bool invertY = false;
-
+    [Header("Mouse Settings")]
+    [SerializeField] private bool invertY = false;
     [SerializeField] private bool invertX = false;
-
-    // Mouse Tracking
-    private Vector2 previousMousePosition;
-    private Vector2 currentMousePosition;
-    private Vector2 mouseSpeed;
-    private float previousTime;
-    private Vector2 mouseDelta;
-
-    private Vector3 targetRotation;
-
-    [Header("Shooting Settings")] [SerializeField]
-    private GameObject bulletPrefab;
-
+    [SerializeField] private float mouseSensitivity = 1f;
+    
+    [Header("Shooting")]
+    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform leftGunSpawn;
     [SerializeField] private Transform rightGunSpawn;
     [SerializeField] private float fireRate = 0.2f;
-    [SerializeField] private float bulletSpeed = 50f;
-    private float nextFireTime = 0f;
+    [SerializeField] private float bulletSpeed = 180f;
+    private float nextFireTime;
 
-    private void Start()
+    private Rigidbody rb;
+    private bool isBoosting;
+    
+    public GameOverMenu gameOverMenu;
+
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        if (_alive == false)
-        {
-            _alive = true;
-        }
-
+        rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
-            Debug.LogError("Spaceship requires a Rigidbody component!");
+            Debug.LogError("Spaceship requires a Rigidbody!");
             return;
         }
 
-        rb.useGravity = false; // Disable default gravity if forgotten & add drag
-        rb.linearDamping = dragCoefficient;
-
-        previousMousePosition = Input.mousePosition;
-        currentMousePosition =
-            previousMousePosition; // is done this way on start cuz previous must logically be loaded before current.
-        previousTime = Time.time;
+        rb.useGravity = false;
+        rb.linearDamping = dragCoefficient;     
+        rb.angularDamping = angularDrag; 
+        
+        InputState.current = new InputState();
     }
 
-    private void Update()
+    void Update()
     {
-        if (Cursor.lockState == CursorLockMode.Locked && Input.GetMouseButton(0))
-        {
-            if (Time.time >= nextFireTime)
-            {
-                Shoot();
-                nextFireTime = Time.time + fireRate;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Cursor.lockState == CursorLockMode.Confined)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Confined;
-            }
-        }
-
-        MovementInputHandler();
-        ThrustInputHandler();
-        MouseInputHandler();
-        RotationHandler();
-        RollHandler();
-        SmoothRotation();
+        HandleInput();
+        HandleShooting();
+        ToggleCursorLock();
     }
 
-    private void MovementInputHandler()
+    void FixedUpdate()
     {
-        isThrusting = Input.GetKey(KeyCode.W);
-        isBoosting = Input.GetKey(KeyCode.LeftShift);
+        ApplyThrust();
+        ApplyRotationTorque();
     }
-
-    private void ThrustInputHandler()
+    
+    void HandleInput()
     {
-        if (!isThrusting) return;
-
-        var currentMaxSpeed = isBoosting ? maxSpeed * boostMultiplier : maxSpeed;
-
-        if (rb.linearVelocity.magnitude < currentMaxSpeed)
-        {
-            var thrustForce = transform.forward * acceleration * rb.mass;
-            rb.AddForce(thrustForce, ForceMode.Force);
-        }
-
-        if (rb.linearVelocity.magnitude > currentMaxSpeed)
-        {
-            rb.linearVelocity = rb.linearVelocity.normalized * currentMaxSpeed;
-        }
-    }
-
-    private void MouseInputHandler()
-    {
-        mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
-        mouseSpeed = Vector2.Lerp(mouseSpeed, mouseDelta / Time.deltaTime, 0.1f);
-    }
-
-    private void RotationHandler()
-    {
-        if (mouseDelta == Vector2.zero) return;
-
-        var horizontalInput = mouseDelta.x;
-        var verticalInput = mouseDelta.y;
-
-        if (invertX) horizontalInput = -horizontalInput;
-        if (invertY) verticalInput = -verticalInput;
-
-
-        var speedMultiplier = Mathf.Clamp01(mouseSpeed.magnitude / maxRotation);
-        var currentRotationSpeed = baseRotation * (1 + speedMultiplier * 9); // 1x to 10x scaling
-
-        var pitch = verticalInput * currentRotationSpeed;
-        var yaw = horizontalInput * currentRotationSpeed;
-
-        targetRotation += new Vector3(-pitch, yaw, 0);
-        targetRotation.x = Mathf.Clamp(targetRotation.x, -80f, 80f);
-        targetRotation.y = Mathf.Repeat(targetRotation.y, 360f);
-    }
-
-    private void SmoothRotation()
-    {
-        var targetQuaternion = Quaternion.Euler(targetRotation);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, smooth * Time.deltaTime);
-    }
-
-    private void ResetRotation()
-    {
-        targetRotation = Vector3.zero;
-    }
-
-    private void RollHandler()
-    {
+        // Thrust (W=1, S=-1) 
+        var forwardInput = Input.GetAxis("Vertical");
+        isBoosting = Input.GetKey(boostKey);
+        
         var rollInput = 0f;
+        if (Input.GetKey(KeyCode.E)) rollInput = -1f;
+        if (Input.GetKey(KeyCode.Q)) rollInput = 1f;
+    
 
-        if (Input.GetKey(KeyCode.A))
+        // Lateral strafe (A=-1, D=1)
+        var lateralInput = Input.GetAxis("Horizontal");
+        
+        var mouseDelta = new Vector2(
+            Input.GetAxis("Mouse X") * mouseSensitivity,
+            Input.GetAxis("Mouse Y") * mouseSensitivity
+        );
+
+       
+        if (invertX) mouseDelta.x = -mouseDelta.x;
+        if (invertY) mouseDelta.y = -mouseDelta.y;
+        
+        InputState.current = new InputState
         {
-            rollInput -= 1f; // Left roll
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            rollInput += 1f; // Right roll
-        }
-
-        if (rollInput == 0f) return;
-
-        var roll = rollInput * rollSpeed * Time.deltaTime;
-        targetRotation += new Vector3(0, 0, -roll);
-
-        targetRotation.z = Mathf.Repeat(targetRotation.z, 360f);
+            forward = forwardInput,
+            lateral = lateralInput,
+            roll = rollInput,
+            pitch = mouseDelta.y,
+            yaw = mouseDelta.x,
+            boosting = isBoosting
+        };
     }
 
-    private void Shoot()
+    
+    private struct InputState
     {
+        public float forward, lateral, roll, pitch, yaw;
+        public bool boosting;
+        public static InputState current;
+    }
+
+    
+    void ApplyThrust()
+    {
+        var state = InputState.current;
+        
+        var forwardSpeed = state.forward > 0 ? forwardThrust : reverseThrust;
+        var maxAllowed = state.boosting ? maxSpeed * boostMultiplier : maxSpeed;
+        
+        if (Mathf.Abs(rb.linearVelocity.magnitude) < maxAllowed || state.forward < 0)
+        {
+            Vector3 thrustDir = transform.forward * state.forward;
+            Vector3 lateralDir = transform.right * state.lateral;
+            Vector3 totalForce = (thrustDir * forwardSpeed + lateralDir * lateralThrust) * rb.mass;
+            rb.AddForce(totalForce, ForceMode.Force);
+        }
+        
+        if (rb.linearVelocity.magnitude > maxAllowed)
+        {
+            rb.linearVelocity = rb.linearVelocity.normalized * maxAllowed;
+        }
+    }
+
+    // ---------- PHYSICS ROTATION (TORQUE) ----------
+    void ApplyRotationTorque()
+    {
+        var state = InputState.current;
+
+        // Pitch around local X, Yaw around local Y, Roll around local Z
+        Vector3 torque = new Vector3(
+            state.pitch * pitchTorque,    // local X
+            state.yaw * yawTorque,        // local Y
+            state.roll * rollTorque       // local Z
+        ) * rb.mass;
+
+       
+        rb.AddRelativeTorque(torque, ForceMode.Force);  // torque in local space
+        
+        if (rb.angularVelocity.magnitude > 10f)
+        {
+                rb.angularVelocity = rb.angularVelocity.normalized * 10f;
+        }
+    }
+
+    
+    void HandleShooting()
+    {
+        if (Cursor.lockState != CursorLockMode.Locked) return;
+        if (!Input.GetMouseButton(0)) return;
+        if (Time.time < nextFireTime) return;
+
+        nextFireTime = Time.time + fireRate;
 
         if (bulletPrefab == null || leftGunSpawn == null || rightGunSpawn == null)
         {
-            Debug.LogWarning("Bullet prefab or spawn points not assigned!");
+            Debug.LogWarning("Shooting not set up.");
             return;
         }
 
-        var leftBullet = Instantiate(bulletPrefab, leftGunSpawn.position, leftGunSpawn.rotation);
-        var leftBulletScript = leftBullet.GetComponent<BulletBehaviour>();
-        if (leftBulletScript != null)
-        {
-            // Optionally set bullet speed if needed
-            leftBulletScript.SetSpeed(bulletSpeed);
-        }
+        SpawnBullet(leftGunSpawn);
+        SpawnBullet(rightGunSpawn);
+    }
 
-        var rightBullet = Instantiate(bulletPrefab, rightGunSpawn.position, rightGunSpawn.rotation);
-        var rightBulletScript = rightBullet.GetComponent<BulletBehaviour>();
-        if (rightBulletScript != null)
+    void SpawnBullet(Transform spawn)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, spawn.position, spawn.rotation);
+        BulletBehaviour script = bullet.GetComponent<BulletBehaviour>();
+        if (script != null) script.SetSpeed(bulletSpeed);
+    }
+
+  
+    private static void ToggleCursorLock()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            rightBulletScript.SetSpeed(bulletSpeed);
+            Cursor.lockState = (Cursor.lockState == CursorLockMode.Locked) ?
+                CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = (Cursor.lockState == CursorLockMode.None);
         }
     }
 
@@ -225,22 +196,16 @@ public class SpaceShipScript : MonoBehaviour
     {
         if (other.CompareTag("Planet"))
         {
-            var planet = other.GetComponent<PlanetBehaviour>();
-            if (planet != null)
-            {
-                planet.DestroyPlanet();
-            }
-            else
-            {
-                Destroy(other.gameObject);
-            }
+            PlanetBehaviour planet = other.GetComponent<PlanetBehaviour>();
+            if (planet != null) planet.DestroyPlanet();
+            else Destroy(other.gameObject);
             Death();
         }
     }
 
     private void Death()
     {
-        _alive = false;
-        Destroy(gameObject);
+        Time.timeScale = 0f;
+        gameOverMenu.EnableGameOverScreen();
     }
 }
