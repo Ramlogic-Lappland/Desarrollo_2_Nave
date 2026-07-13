@@ -9,8 +9,6 @@ public class MusicManager : MonoBehaviour
     
     public static MusicManager instance;
     
-    private float _masterVolume = 0.5f;
-    
     private void Awake()
     {
         if (instance != null)

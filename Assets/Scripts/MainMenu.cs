@@ -14,12 +14,13 @@ public class MainMenu : MonoBehaviour
     public void Start()
     {
         LoadVolume();
+        MusicManager.instance.PlayMusic("menusong");
     }
 
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        MusicManager.instance.PlayMusic("mainsong");
+        MusicManager.instance.PlayMusic("gamesong");
     }
 
     public void QuitGame()
