@@ -180,6 +180,7 @@ public class SpaceShipScript : MonoBehaviour
 
     void SpawnBullet(Transform spawn)
     {
+        SoundManager.instance.PLaySound3D("lazer", transform.position);
         GameObject bullet = Instantiate(bulletPrefab, spawn.position, spawn.rotation);
         BulletBehaviour script = bullet.GetComponent<BulletBehaviour>();
         if (script != null) script.SetSpeed(bulletSpeed);
@@ -214,8 +215,8 @@ public class SpaceShipScript : MonoBehaviour
 
     public void Death()
     {
+        SoundManager.instance.PLaySound3D("playerdefeat", transform.position);
         Instantiate(destructionEffect, transform.position, Quaternion.identity);
-        Time.timeScale = 0f;
         gameOverMenu.EnableGameOverScreen();
     }
 }

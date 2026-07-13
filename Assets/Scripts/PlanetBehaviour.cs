@@ -18,6 +18,7 @@ public class PlanetBehaviour : MonoBehaviour
         
         if (destructionEffect != null)
         {
+            SoundManager.instance.PLaySound3D("planetexplosion", transform.position);
             Instantiate(destructionEffect, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
